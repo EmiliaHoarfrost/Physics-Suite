@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Physics Suite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #575757;
+        }
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+        .dropdown .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .content {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #575757;
+            border-radius: 10px;
+            background-color: #222;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+        .content a {
+            color: #00c8ff;
+            text-decoration: none;
+        }
+        .content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="home.html">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Matrices 
+                <i class="arrow down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Placeholder 1</a>
+                <a href="#">Placeholder 2</a>
+                <a href="#">Placeholder 3</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Vector Analysis 
+                <i class="arrow down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Placeholder 1</a>
+                <a href="#">Placeholder 2</a>
+                <a href="#">Placeholder 3</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Uncertainties 
+                <i class="arrow down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Placeholder 1</a>
+                <a href="#">Placeholder 2</a>
+                <a href="#">Placeholder 3</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Constants 
+                <i class="arrow down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Placeholder 1</a>
+                <a href="#">Placeholder 2</a>
+                <a href="#">Placeholder 3</a>
+            </div>
+        </div>
+        <a href="about.html">About</a>
+    </div>
+    <div class="content">
+        <h1>About Physics Suite</h1>
+        <p>
+            Welcome to <strong>Physics Suite</strong>, an open-source project dedicated to empowering physics students, researchers, and enthusiasts worldwide. 
+            This platform provides a comprehensive suite of tools designed to simplify complex calculations, including matrix operations, 
+            vector analysis, Laplacians, and vector Laplacians.
+        </p>
+        <p>
+            Our mission is to create an accessible and extensible computational environment where users can focus on their studies and research 
+            rather than the tedious details of numerical computation. The project is hosted on <a href="https://github.com/your-repository-link">GitHub</a>, 
+            ensuring transparency and community-driven development.
+        </p>
+        <p>
+            <strong>Physics Suite</strong> is in active development, with plans for scaling and incorporating additional features based on user feedback. 
+            By providing a platform that grows with the needs of the scientific community, we aim to facilitate breakthroughs and foster collaboration.
+        </p>
+        <p>
+            Join us on this journey to make physics computation intuitive and efficient for everyone.
+        </p>
+    </div>
+</body>
+</html>
