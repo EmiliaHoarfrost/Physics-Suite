@@ -19,7 +19,6 @@
             justify-content: center;
         }
         .navbar a {
-            float: left;
             display: block;
             color: white;
             text-align: center;
@@ -52,7 +51,6 @@
             z-index: 1;
         }
         .dropdown-content a {
-            float: none;
             color: black;
             padding: 12px 16px;
             text-decoration: none;
@@ -70,8 +68,37 @@
 <body>
     <div class="navbar">
         <a href="home.html">Home</a>
+
+        <!-- Matrices Dropdown -->
         <div class="dropdown">
-            <button class="dropbtn">Matrices 
+            <button class="dropbtn">Matrices
+                <i class="arrow down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Elementary operations (addition, multiplication, inversion)</a>
+                <a href="#">Projection Matrices</a>
+                <a href="#">Determinant</a>
+                <a href="#">Hermitian adjoint</a>
+            </div>
+        </div>
+
+        <!-- Vector Analysis Dropdown -->
+        <div class="dropdown">
+            <button class="dropbtn">Vector Analysis
+                <i class="arrow down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Gradient</a>
+                <a href="#">Divergence</a>
+                <a href="#">Curl</a>
+                <a href="#">Laplacian</a>
+                <a href="#">Vector Laplacian</a>
+            </div>
+        </div>
+
+        <!-- Uncertainties Dropdown -->
+        <div class="dropdown">
+            <button class="dropbtn">Uncertainties
                 <i class="arrow down"></i>
             </button>
             <div class="dropdown-content">
@@ -80,36 +107,27 @@
                 <a href="#">Placeholder 3</a>
             </div>
         </div>
+
+        <!-- SI Units Dropdown -->
         <div class="dropdown">
-            <button class="dropbtn">Vector Analysis 
+            <button class="dropbtn">SI Units
                 <i class="arrow down"></i>
             </button>
             <div class="dropdown-content">
-                <a href="#">Placeholder 1</a>
-                <a href="#">Placeholder 2</a>
-                <a href="#">Placeholder 3</a>
+                <a href="#">Length → meter (m)</a>
+                <a href="#">Mass → kilogram (kg)</a>
+                <a href="#">Time → second (s)</a>
+                <a href="#">Quantity of matter → mole (mol)</a>
+                <a href="#">Temperature → Kelvin (K)</a>
+                <a href="#">Current → Ampere (A)</a>
+                <a href="#">Light intensity → Candela (Cd)</a>
             </div>
         </div>
-        <div class="dropdown">
-            <button class="dropbtn">Uncertainties 
-                <i class="arrow down"></i>
-            </button>
-            <div class="dropdown-content">
-                <a href="#">Placeholder 1</a>
-                <a href="#">Placeholder 2</a>
-                <a href="#">Placeholder 3</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn">Constants 
-                <i class="arrow down"></i>
-            </button>
-            <div class="dropdown-content">
-                <a href="#">Placeholder 1</a>
-                <a href="#">Placeholder 2</a>
-                <a href="#">Placeholder 3</a>
-            </div>
-        </div>
+
+        <!-- Constants Link -->
+        <a href="constants.html">Constants</a>
+
+        <!-- About Link -->
         <a href="about.html">About</a>
     </div>
 </body>
