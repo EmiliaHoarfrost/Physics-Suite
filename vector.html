@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<script type="text/javascript" async 
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vector Analysis Calculator</title>
+    <style>
+        /* General body styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+        }
+
+        /* Navbar container */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Navbar links */
+        .navbar a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Hover effect for navbar links */
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #575757;
+        }
+
+        /* Dropdown container */
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        /* Dropdown button */
+        .dropdown .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        /* Dropdown content container */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #575757;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        /* Links inside dropdowns */
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        /* Hover effects for dropdown links */
+        .dropdown-content a:hover {
+            background-color: #777;
+        }
+
+        /* Show dropdown when hovering */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Content section (the calculator) */
+        .content {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #575757;
+            border-radius: 10px;
+            background-color: #222;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        .content input, .content select {
+            background-color: #333;
+            border: 1px solid #575757;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .content input[type="text"], .content select {
+            width: 50%; /* Restrict the width of the inputs and select dropdown */
+        }
+
+        .content button {
+            background-color: #575757;
+            color: white;
+            padding: 14px 16px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .content button:hover {
+            background-color: #888;
+        }
+
+        .output {
+            margin-top: 20px;
+            background-color: #333;
+            padding: 15px;
+            border-radius: 5px;
+            color: white;
+            white-space: pre-wrap;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <!-- Matrices Dropdown -->
+        <div class="dropdown">
+            <button class="dropbtn">Matrices</button>
+            <div class="dropdown-content">
+                <a href="#">Elementary operations (addition, multiplication, inversion)</a>
+                <a href="#">Projection Matrices</a>
+                <a href="#">Determinant</a>
+                <a href="#">Hermitian adjoint</a>
+            </div>
+        </div>
+
+        <!-- Vector Analysis Dropdown (Updated as a link) -->
+        <div class="dropdown">
+            <a href="vector.html" class="dropbtn">Vector Analysis</a>
+            <div class="dropdown-content">
+                <a href="#">Gradient</a>
+                <a href="#">Divergence</a>
+                <a href="#">Curl</a>
+                <a href="#">Laplacian</a>
+                <a href="#">Vector Laplacian</a>
+            </div>
+        </div>
+
+        <!-- Uncertainties Dropdown -->
+        <div class="dropdown">
+            <button class="dropbtn">Uncertainties</button>
+            <div class="dropdown-content">
+                <a href="#">Placeholder 1</a>
+                <a href="#">Placeholder 2</a>
+                <a href="#">Placeholder 3</a>
+            </div>
+        </div>
+
+        <!-- SI Units Dropdown -->
+        <div class="dropdown">
+            <button class="dropbtn">SI Units</button>
+            <div class="dropdown-content">
+                <a href="#">Length → meter (m)</a>
+                <a href="#">Mass → kilogram (kg)</a>
+                <a href="#">Time → second (s)</a>
+                <a href="#">Quantity of matter → mole (mol)</a>
+                <a href="#">Temperature → Kelvin (K)</a>
+                <a href="#">Current → Ampere (A)</a>
+                <a href="#">Light intensity → Candela (Cd)</a>
+            </div>
+        </div>
+
+        <!-- Constants Link -->
+        <a href="constants.html">Constants</a>
+
+        <!-- About Link -->
+        <a href="about.html">About</a>
+    </div>
+
+    <div class="content">
+        <h1>Vector Analysis Calculator</h1>
+        <p>Use this tool to compute gradients, divergences, or Laplacians in Cartesian, Cylindrical, or Spherical coordinates.</p>
+
+        <div>
+            <label for="type">Select Operation:</label><br>
+            <select id="type">
+                <option value="gradient_cartesian">Gradient (Cartesian)</option>
+                <option value="gradient_cylindrical">Gradient (Cylindrical)</option>
+                <option value="gradient_spherical">Gradient (Spherical)</option>
+                <option value="laplacian_cartesian">Laplacian (Cartesian)</option>
+                <option value="laplacian_cylindrical">Laplacian (Cylindrical)</option>
+                <option value="laplacian_spherical">Laplacian (Spherical)</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="xInput">Input Function for \(x\) (or \(\rho\)/r):</label><br>
+            <input type="text" id="xInput" placeholder="e.g., \(x^2 + y^2 + z^2\)">
+        </div>
+
+        <div>
+            <label for="yInput">Input Function for \(y\) (or \(\theta\)):</label><br>
+            <input type="text" id="yInput" placeholder="e.g., \(\sin(\theta) \cdot \phi\)">
+        </div>
+
+        <div>
+            <label for="zInput">Input Function for \(z\) (or \(\phi\)):</label><br>
+            <input type="text" id="zInput" placeholder="e.g., \(\exp(-z)\)">
+        </div>
+
+        <button onclick="calculate()">Calculate</button>
+
+        <div class="output">
+            <h3>Output:</h3>
+            <pre id="output">Enter values and press Calculate to see results.</pre>
+        </div>
+    </div>
+
+    <script>
+        async function loadPython() {
+            window.pyodide = await loadPyodide();
+            await pyodide.loadPackage("sympy");
+        }
+
+        async function calculate() {
+            const type = document.getElementById('type').value;
+            const xInput = document.getElementById('xInput').value;
+            const yInput = document.getElementById('yInput').value;
+            const zInput = document.getElementById('zInput').value;
+
+            const pythonScript = `
+import sympy as sym
+x, y, z, rho, theta, r, phi = sym.symbols('x y z rho theta r phi')
+
+def nabla_3d_cartesian(x_argument, y_argument, z_argument):
+    x_1 = sym.diff(x_argument, x)
+    y_1 = sym.diff(y_argument, y)
+    z_1 = sym.diff(z_argument, z)
+    return x_1, y_1, z_1
+
+x_func = sym.sympify("${xInput}")
+y_func = sym.sympify("${yInput}")
+z_func = sym.sympify("${zInput}")
+
+result = ""
+if "${type}" == "gradient_cartesian":
+    result = nabla_3d_cartesian(x_func, y_func, z_func)
+
+result
+`;
+
+            try {
+                const output = await pyodide.runPython(pythonScript);
+                document.getElementById('output').textContent = output;
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, "output"]);
+            } catch (err) {
+                document.getElementById('output').textContent = "Error in calculation: " + err;
+            }
+        }
+
+        loadPython();
+    </script>
+</body>
+</html>
