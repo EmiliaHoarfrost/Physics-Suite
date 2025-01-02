@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constants - Physics Suite</title>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+			position: relative;
+			z-index: 10;
+        }
+        .navbar a, .dropbtn {
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #575757;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #575757;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 20;
+        }
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background-color: #333;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .content {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #575757;
+            border-radius: 10px;
+            background-color: #222;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+        .content a {
+            color: #00c8ff;
+            text-decoration: none;
+        }
+        .content a:hover {
+            text-decoration: underline;
+        }
+        .constant-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .constant-list li {
+            padding: 10px;
+            background-color: #333;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .section-title {
+            font-size: 24px;
+            color: #00c8ff;
+            margin-top: 20px;
+        }
+        .relevance-text {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <!-- Matrices Dropdown -->
+        <div class="dropdown">
+            <button class="dropbtn">Matrices</button>
+            <div class="dropdown-content">
+                <a href="#">Elementary operations (addition, multiplication, inversion)</a>
+                <a href="#">Projection Matrices</a>
+                <a href="#">Determinant</a>
+                <a href="#">Hermitian adjoint</a>
+            </div>
+        </div>
+
+        <!-- Vector Analysis Dropdown -->
+        <div class="dropdown">
+            <button class="dropbtn">Vector Analysis</button>
+            <div class="dropdown-content">
+                <a href="#">Gradient</a>
+                <a href="#">Divergence</a>
+                <a href="#">Curl</a>
+                <a href="#">Laplacian</a>
+                <a href="#">Vector Laplacian</a>
+            </div>
+        </div>
+
+        <!-- Uncertainties Dropdown -->
+        <div class="dropdown">
+            <button class="dropbtn">Uncertainties</button>
+            <div class="dropdown-content">
+                <a href="#">Placeholder 1</a>
+                <a href="#">Placeholder 2</a>
+                <a href="#">Placeholder 3</a>
+            </div>
+        </div>
+
+        <!-- SI Units Dropdown -->
+        <div class="dropdown">
+            <button class="dropbtn">SI Units</button>
+            <div class="dropdown-content">
+                <a href="#">Length → meter (m)</a>
+                <a href="#">Mass → kilogram (kg)</a>
+                <a href="#">Time → second (s)</a>
+                <a href="#">Quantity of matter → mole (mol)</a>
+                <a href="#">Temperature → Kelvin (K)</a>
+                <a href="#">Current → Ampere (A)</a>
+                <a href="#">Light intensity → Candela (Cd)</a>
+            </div>
+        </div>
+
+        <!-- Constants Link -->
+        <a href="constants.html">Constants</a>
+
+        <!-- About Link -->
+        <a href="about.html">About</a>
+		<a href="vector.html">Vector Analysis</a>
+    </div>
+
+    <div class="content">
+        <h1>Physical Constants</h1>
+        <p class="relevance-text">
+            Constants play a crucial role in physics as they serve as fundamental building blocks for various calculations and equations across all branches of the field. Understanding and applying these constants are essential for solving problems in quantum mechanics, thermodynamics, electromagnetism, and other areas of physics. Here, you will find a selection of the most important physical constants, categorized by their relevant areas of application.
+        </p>
+
+        <div class="section-title">General Constants</div>
+        <ul class="constant-list">
+            <li><strong>Speed of light (c):</strong> \( 299 792 458 \, \text{m/s} \)</li>
+            <li><strong>Planck's constant (h):</strong> \( 6.62607015 \times 10^{-34} \, \text{J·s} \)</li>
+            <li><strong>Boltzmann constant (k):</strong> \( 1.380649 \times 10^{-23} \, \text{J/K} \)</li>
+            <li><strong>Elementary charge (e):</strong> \( 1.602176634 \times 10^{-19} \, \text{C} \)</li>
+            <li><strong>Vacuum magnetic permeability (μ₀):</strong> \( 4\pi \times 10^{-7} \, \text{N/A}^2 \)</li>
+            <li><strong>Vacuum electric permittivity (ε₀):</strong> \( 8.854187817 \times 10^{-12} \, \text{F/m} \)</li>
+        </ul>
+
+        <div class="section-title">Thermodynamics & Statistical Mechanics</div>
+        <ul class="constant-list">
+            <li><strong>Gravitational constant (G):</strong> \( 6.67430 \times 10^{-11} \, \text{m}^3 \cdot \text{kg}^{-1} \cdot \text{s}^{-2} \)</li>
+            <li><strong>Avogadro's constant (Nₐ):</strong> \( 6.02214076 \times 10^{23} \, \text{mol}^{-1} \)</li>
+            <li><strong>Gas constant (R):</strong> \( 8.314 \, \text{J/mol·K} \)</li>
+            <li><strong>Stefan-Boltzmann constant (σ):</strong> \( 5.670374419 \times 10^{-8} \, \text{W} \cdot \text{m}^{-2} \cdot \text{K}^{-4} \)</li>
+        </ul>
+
+        <div class="section-title">Quantum Mechanics</div>
+        <ul class="constant-list">
+            <li><strong>Rydberg constant (Rₑ):</strong> \( 1.097373 \times 10^7 \, \text{m}^{-1} \)</li>
+            <li><strong>Planck length (ℓₚ):</strong> \( 1.616255 \times 10^{-35} \, \text{m} \)</li>
+            <li><strong>Fine-structure constant (α):</strong> \( \frac{1}{137} \) (dimensionless)</li>
+        </ul>
+
+        <div class="section-title">Nuclear Physics</div>
+        <ul class="constant-list">
+            <li><strong>Electron mass (mₑ):</strong> \( 9.10938356 \times 10^{-31} \, \text{kg} \)</li>
+            <li><strong>Proton mass (mₚ):</strong> \( 1.6726219 \times 10^{-27} \, \text{kg} \)</li>
+            <li><strong>Neutron mass (mₙ):</strong> \( 1.675 \times 10^{-27} \, \text{kg} \)</li>
+            <li><strong>Atomic mass unit (u):</strong> \( 1.66053906660 \times 10^{-27} \, \text{kg} \)</li>
+            <li><strong>Thomson scattering cross-section (σₜ):</strong> \( 6.652458 \times 10^{-29} \, \text{m}^2 \)</li>
+        </ul>
+    </div>
+</body>
+</html>
