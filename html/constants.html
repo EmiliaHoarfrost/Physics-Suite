@@ -20,32 +20,38 @@
             overflow: hidden;
             display: flex;
             justify-content: center;
-			position: relative;
-			z-index: 10;
         }
-        .navbar a, .dropbtn {
+        .navbar a {
+            display: block;
             color: white;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
-            cursor: pointer;
-            border: none;
-            background: none;
         }
         .navbar a:hover, .dropdown:hover .dropbtn {
             background-color: #575757;
         }
         .dropdown {
-            position: relative;
-            display: inline-block;
+            float: left;
+            overflow: hidden;
+        }
+        .dropdown .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
         }
         .dropdown-content {
             display: none;
             position: absolute;
             background-color: #575757;
             min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 20;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
         }
         .dropdown-content a {
             color: white;
@@ -55,7 +61,7 @@
             text-align: left;
         }
         .dropdown-content a:hover {
-            background-color: #333;
+            background-color: #777;
         }
         .dropdown:hover .dropdown-content {
             display: block;
@@ -115,7 +121,7 @@
 
         <!-- Vector Analysis Dropdown -->
         <div class="dropdown">
-            <button class="dropbtn">Vector Analysis</button>
+            <a href="vector.html" class="dropbtn">Vector Analysis</a>
             <div class="dropdown-content">
                 <a href="#">Gradient</a>
                 <a href="#">Divergence</a>
@@ -154,7 +160,6 @@
 
         <!-- About Link -->
         <a href="about.html">About</a>
-		<a href="vector.html">Vector Analysis</a>
     </div>
 
     <div class="content">
