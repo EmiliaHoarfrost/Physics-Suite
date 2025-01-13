@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Physics Suite</title>
@@ -9,15 +8,21 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: black;
+            padding-top: 50px; /* Add padding to account for fixed navbar */
+            background-color: black; /* Use the exact dark color from Resources page */
             color: white;
+            transition: background-color 0.3s, color 0.3s;
         }
         .navbar {
             background-color: #333;
             overflow: hidden;
             display: flex;
             justify-content: center;
+            position: fixed; /* Make navbar fixed */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure navbar stays on top */
         }
         .navbar a {
             display: block;
@@ -68,12 +73,17 @@
             max-width: 800px;
             margin: 50px auto;
             padding: 20px;
-            text-align: center;
+            text-align: center; /* Center the content */
             border: 1px solid #575757;
             border-radius: 10px;
-            background-color: #222;
+            background-color: #222; /* Dark background for content */
             font-size: 20px;
-            line-height: 1.6;
+            line-height: 1.8;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .content.light-mode {
+            background-color: #f0f0f0;
+            color: #000;
         }
         .content a {
             color: #00c8ff;
@@ -82,11 +92,86 @@
         .content a:hover {
             text-decoration: underline;
         }
+        ul {
+            list-style-position: inside;
+            margin: 20px 0;
+        }
+        ul li {
+            margin: 10px 0;
+        }
+        .sidebar {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background: #575757;
+            color: white;
+            border-radius: 10px 0 0 10px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sidebar button {
+            background: #575757;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px 0;
+            transition: background 0.3s;
+        }
+        .sidebar button:hover {
+            background: #777;
+        }
+        .sidebar button.light-mode {
+            background: #ddd;
+            color: black;
+        }
+        body.light-mode {
+            background-color: white;
+            color: black;
+        }
+        .logo-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
+        }
+        h1 {
+            text-align: center; /* Center the title */
+            margin-bottom: 20px;
+        }
     </style>
+    <script>
+        function toggleMode() {
+            const body = document.body;
+            const content = document.querySelectorAll('.content');
+            const buttons = document.querySelectorAll('.sidebar button');
+            const isDark = body.classList.contains('dark-mode');
+            
+            body.classList.toggle('dark-mode', !isDark);
+            body.classList.toggle('light-mode', isDark);
+            
+            content.forEach(el => el.classList.toggle('light-mode', isDark));
+            
+            buttons.forEach(button => button.classList.toggle('light-mode', isDark));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('dark-mode');
+        });
+    </script>
 </head>
 <body>
+    <div class="sidebar">
+        <button onclick="toggleMode()">💡 Toggle Theme</button>
+    </div>
     <div class="navbar">
-        <!-- Matrices Dropdown -->
         <div class="dropdown">
             <button class="dropbtn">Matrices</button>
             <div class="dropdown-content">
@@ -96,8 +181,6 @@
                 <a href="#">Hermitian adjoint</a>
             </div>
         </div>
-
-        <!-- Vector Analysis Dropdown -->
         <div class="dropdown">
             <a href="vector.html" class="dropbtn">Vector Analysis</a>
             <div class="dropdown-content">
@@ -108,8 +191,6 @@
                 <a href="#">Vector Laplacian</a>
             </div>
         </div>
-
-        <!-- Uncertainties Dropdown -->
         <div class="dropdown">
             <button class="dropbtn">Uncertainties</button>
             <div class="dropdown-content">
@@ -118,8 +199,6 @@
                 <a href="#">Placeholder 3</a>
             </div>
         </div>
-
-        <!-- SI Units Dropdown -->
         <div class="dropdown">
             <button class="dropbtn">SI Units</button>
             <div class="dropdown-content">
@@ -132,14 +211,10 @@
                 <a href="#">Light intensity → Candela (Cd)</a>
             </div>
         </div>
-
-        <!-- Constants Link -->
         <a href="constants.html">Constants</a>
-
-        <!-- About Link -->
+        <a href="resources.html">Resources</a>
         <a href="about.html">About</a>
     </div>
-
     <div class="content">
         <h1>About Physics Suite</h1>
         <p>
