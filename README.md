@@ -7,7 +7,7 @@
 - **🌗 Theme Options**: Easily toggle between **Light** and **Dark** themes for a comfortable viewing experience.
 - **📰 Live Feed**: Stay informed with real-time updates on the latest developments in physics.
 - **🔢 Matrices**: Perform complex matrix operations and apply them to physics problems.
-- **🚀 Vector Analysis**: Access tools for vector operations, crucial in many physics domains.
+- **[🚀](https://fonts.gstatic.com/s/e/notoemoji/latest/1f680/lottie.json) Vector Analysis**: Access tools for vector operations, crucial in many physics domains.
 - **⏱ Uncertainties**: Calculate and manage uncertainties in experimental data.
 - **📐 SI Units**: A comprehensive guide to SI units for accurate measurement and conversion.
 - **🧰 Resources**: Curated list of textbooks, research papers, and educational websites for further study.
