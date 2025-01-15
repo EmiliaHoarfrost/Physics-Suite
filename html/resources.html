@@ -4,69 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resources - Physics Suite</title>
-	<link rel="icon" href="https://raw.githubusercontent.com/EmiliaHoarfrost/Physics-Suite/97ba13ea03e53574c87f30b8f38385962224a1bb/img/favicon.svg" type="image/svg+xml">
-	
+    <link rel="icon" href="https://raw.githubusercontent.com/EmiliaHoarfrost/Physics-Suite/97ba13ea03e53574c87f30b8f38385962224a1bb/img/favicon.svg" type="image/svg+xml">
+    
     <style>
-	
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
-            height: 6px; /* Horizontal scrollbar size */
+            height: 6px;
             transition: background-color 0.3s ease;
         }
 
-        /* Initial Dark Mode scrollbar thumb */
         ::-webkit-scrollbar-thumb {
-            background-color: #111; /* Dark mode color for thumb */
+            background-color: #111;
             border-radius: 10px;
             border: 2px solid #000;
             transition: background-color 0.3s ease;
         }
 
-        /* Dark Mode scrollbar track */
         ::-webkit-scrollbar-track {
-            background-color: #fff; /* White track color in dark mode */
+            background-color: #fff;
             transition: background-color 0.3s ease;
         }
 
-        /* Light Mode scrollbar thumb */
         body.light-mode ::-webkit-scrollbar-thumb {
-            background-color: #777; /* Light mode color for thumb */
+            background-color: #777;
         }
 
-        /* Light Mode scrollbar track */
         body.light-mode ::-webkit-scrollbar-track {
-            background-color: #333; /* Darker track color in light mode */
+            background-color: #333;
         }
 
-        /* Hover effect for Dark Mode */
         ::-webkit-scrollbar-thumb:hover {
-            background-color: #444; /* Darker color for thumb on hover in dark mode */
+            background-color: #444;
         }
 
-        /* Hover effect for Light Mode */
         body.light-mode ::-webkit-scrollbar-thumb:hover {
-            background-color: #aaa; /* Lighter color for thumb on hover in light mode */
+            background-color: #aaa;
         }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding-top: 50px; /* Add padding to account for fixed navbar */
+            padding-top: 50px;
             background-color: black;
             color: white;
             transition: background-color 0.3s, color 0.3s;
         }
+
         .navbar {
             background-color: #333;
             overflow: hidden;
             display: flex;
             justify-content: center;
-            position: fixed; /* Make navbar fixed */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000; /* Ensure navbar stays on top */
+            z-index: 1000;
         }
+
         .navbar a {
             display: block;
             color: white;
@@ -74,13 +70,16 @@
             padding: 14px 16px;
             text-decoration: none;
         }
+
         .navbar a:hover, .dropdown:hover .dropbtn {
             background-color: #575757;
         }
+
         .dropdown {
             float: left;
             overflow: hidden;
         }
+
         .dropdown .dropbtn {
             font-size: 16px;
             border: none;
@@ -91,6 +90,7 @@
             font-family: inherit;
             margin: 0;
         }
+
         .dropdown-content {
             display: none;
             position: absolute;
@@ -99,6 +99,7 @@
             box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
             z-index: 1;
         }
+
         .dropdown-content a {
             color: white;
             padding: 12px 16px;
@@ -106,12 +107,15 @@
             display: block;
             text-align: left;
         }
+
         .dropdown-content a:hover {
             background-color: #777;
         }
+
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
         .content {
             max-width: 800px;
             margin: 50px auto;
@@ -124,24 +128,71 @@
             line-height: 1.8;
             transition: background-color 0.3s, color 0.3s;
         }
+/* Content Section Styling in Light Mode */
+body.light-mode .content {
+    background-color: #f0f0f0; /* Light background color for content section */
+    color: #333; /* Dark text color for contrast */
+    border-color: #ccc; /* Lighter border color for content section */
+    border-radius: 10px; /* Rounded corners for content section */
+}
+
+/* Table Styling in Light Mode */
+body.light-mode table, 
+body.light-mode th, 
+body.light-mode td {
+    border-color: #ccc; /* Lighter border color for table */
+    border-radius: 10px; /* Rounded corners for table */
+}
+
+body.light-mode th {
+    background-color: #f0f0f0; /* Light background for table header */
+    color: #333; /* Dark text color for header */
+}
+
+body.light-mode td {
+    background-color: #ffffff; /* Light background for table cells */
+    color: #333; /* Dark text color for table cells */
+}
+
+/* Table of Contents Styling in Light Mode */
+body.light-mode .toc {
+    background-color: #f0f0f0; /* Light background color for TOC */
+    color: #333; /* Dark text color for TOC */
+    border-color: #ccc; /* Lighter border color for TOC */
+}
+
+/* Table of Contents Links in Light Mode */
+body.light-mode .toc a {
+    color: #00c8ff; /* Light theme link color */
+}
+
+body.light-mode .toc a:hover {
+    text-decoration: underline;
+}
+
         .content.light-mode {
             background-color: #f0f0f0;
             color: #000;
         }
+
         .content a {
             color: #00c8ff;
             text-decoration: none;
         }
+
         .content a:hover {
             text-decoration: underline;
         }
+
         ul {
             list-style-position: inside;
             margin: 20px 0;
         }
+
         ul li {
             margin: 10px 0;
         }
+
         .sidebar {
             position: fixed;
             top: 50%;
@@ -156,6 +207,7 @@
             flex-direction: column;
             align-items: center;
         }
+
         .sidebar button {
             background: #575757;
             color: white;
@@ -167,56 +219,84 @@
             margin: 5px 0;
             transition: background 0.3s;
         }
+
         .sidebar button:hover {
             background: #777;
         }
+
         .sidebar button.light-mode {
             background: #ddd;
             color: black;
         }
+
         body.light-mode {
             background-color: white;
             color: black;
         }
+
         .logo-container {
             text-align: center;
             margin: 20px 0;
         }
+
         .logo-container img {
             max-width: 200px;
             height: auto;
         }
+
         h1 {
-            text-align: center; /* Center the title */
+            text-align: center;
             margin-bottom: 20px;
         }
-    </style>
-    <script>
-        function toggleMode() {
-            const body = document.body;
-            const content = document.querySelectorAll('.content');
-            const buttons = document.querySelectorAll('.sidebar button');
-            const isDark = body.classList.contains('dark-mode');
-            
-            body.classList.toggle('dark-mode', !isDark);
-            body.classList.toggle('light-mode', isDark);
-            
-            content.forEach(el => el.classList.toggle('light-mode', isDark));
-            
-            buttons.forEach(button => button.classList.toggle('light-mode', isDark));
+
+        /* Table of Contents */
+        .toc {
+            font-size: 18px;
+            margin-bottom: 20px;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
         }
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.classList.add('dark-mode');
-        });
-    </script>
+
+        .toc a {
+            color: #00c8ff;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #575757;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+    </style>
 </head>
 <body>
     <div class="sidebar">
         <button onclick="toggleMode()">🌗 Theme</button>
         <a href="livefeed.html"><button>📰 Live Feed</button></a>
         <a href="about.html"><button>🏠 About</button></a>
-
     </div>
+
     <div class="navbar">
         <div class="dropdown">
             <button class="dropbtn">Matrices</button>
@@ -260,39 +340,71 @@
         <a href="constants.html">Constants</a>
         <a href="resources.html">Resources</a>
     </div>
+
     <div class="content">
         <h1>Resources</h1>
-        <p>
-            <strong><a href="https://www.geogebra.org/" target="_blank">GeoGebra</a></strong> is an exceptional interactive mathematics software used worldwide for learning and teaching. Its capabilities extend beyond geometry into algebra, calculus, and physics simulations. GeoGebra provides a visual and dynamic way to explore concepts, allowing users to create interactive models and experiments.
-        </p>
-        <p>
-            Why is GeoGebra useful for physics?
-        </p>
-        <ul>
-            <li>Visualize complex physical systems dynamically.</li>
-            <li>Simulate scenarios such as motion, forces, and field lines.</li>
-            <li>Interactive tools for students to explore and understand concepts.</li>
-            <li>Facilitates experimentation with parameters in real-time.</li>
-        </ul>
-        <div class="logo-container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Geogebra.svg/1200px-Geogebra.svg.png" alt="GeoGebra Logo">
-        </div>
         
-        <p>
-            <strong><a href="https://www.desmos.com/" target="_blank">Desmos</a></strong> is a powerful graphing calculator tool that helps visualize mathematical concepts, especially useful in physics to graph functions, analyze data, and simulate different scenarios. Desmos also allows you to create custom graphs and models, providing students with an interactive environment to explore various physics problems.
-        </p>
-        <p>
-            Why is Desmos useful for physics?
-        </p>
-        <ul>
-            <li>Graphical representation of physical data and functions.</li>
-            <li>Simulation of physics problems like motion and energy transformations.</li>
-            <li>Interactive graphing capabilities for students to explore physics concepts.</li>
-            <li>Easy-to-use interface with real-time results.</li>
-        </ul>
-        <div class="logo-container">
-            <img src="https://avatars.githubusercontent.com/u/1840620?s=200&v=4" alt="Desmos Logo">
+        <!-- Table of Contents -->
+        <div class="toc">
+            <strong>Table of Contents:</strong>
+            <ul>
+                <li><a href="#calculus-tools">Calculus Tools</a></li>
+                <li><a href="#visualization-tools">Visualization Tools</a></li>
+            </ul>
         </div>
+
+        <!-- Calculus Tools Section -->
+        <div id="calculus-tools">
+            <h2>Calculus Tools</h2>
+            <table>
+                <tr>
+                    <th>Tool</th>
+                    <th>Usage in Physics</th>
+                    <th>Logo</th>
+                </tr>
+                <tr>
+                    <td><a href="https://www.geogebra.org/" target="_blank">GeoGebra</a></td>
+                    <td>Interactive software for visualizing and experimenting with math and physics problems, especially for geometry, algebra, and physics simulations. Ideal for working with derivatives, integrals, and more.</td>
+                    <td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Geogebra.svg/1200px-Geogebra.svg.png" alt="GeoGebra Logo" style="max-width: 100px;"></td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.desmos.com/" target="_blank">Desmos</a></td>
+                    <td>Graphing calculator that visualizes data, functions, and simulations. Perfect for experimenting with math functions, derivatives, and integrals in the context of physics problems.</td>
+                    <td><img src="https://avatars.githubusercontent.com/u/1840620?s=200&v=4" alt="Desmos Logo" style="max-width: 100px;"></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Visualization Tools Section -->
+        <div id="visualization-tools">
+            <h2>Visualization Tools</h2>
+            <p>
+                <strong><a href="https://www.blender.org/" target="_blank">Blender</a></strong> is a powerful 3D creation suite, which can be used for visualizing and simulating physical phenomena. With its scripting capabilities in Python, Blender be                 be used for creating simulations in physics, visualizing 3D models, and even modeling complex physical systems. You can create animations, graphs, and more to enhance your understanding of physics concepts.
+            </p>
+            <table>
+                <tr>
+                    <th>Tool</th>
+                    <th>Usage in Physics</th>
+                    <th>Logo</th>
+                </tr>
+                <tr>
+                    <td><a href="https://www.blender.org/" target="_blank">Blender</a></td>
+                    <td>Open-source software for 3D modeling, animation, and simulation. It can be used for physics-based simulations, like fluid dynamics, rigid body dynamics, and more. Ideal for visualizing complex physics concepts in 3D.</td>
+                    <td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Blender_logo_no_text.svg/1024px-Blender_logo_no_text.svg.png" alt="Blender Logo" style="max-width: 100px;"></td>
+                </tr>
+            </table>
+        </div>
+
     </div>
+
+    <!-- Sidebar Theme Toggle Script -->
+    <script>
+        function toggleMode() {
+            document.body.classList.toggle('light-mode');
+            const buttons = document.querySelectorAll('.sidebar button');
+            buttons.forEach(button => button.classList.toggle('light-mode'));
+        }
+    </script>
+
 </body>
 </html>
