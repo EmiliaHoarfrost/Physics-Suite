@@ -1,3 +1,5 @@
+https://github.com/EmiliaHoarfrost/Physics-Suite/blob/main/img/loader.gif
+
 # **Physics Suite** - A Comprehensive Toolkit for Physics
 
 **Physics Suite** is a powerful toolkit designed to meet the needs of **academics**, **professionals**, and **students** in the field of physics. It includes a variety of tools to streamline your work and studies:
