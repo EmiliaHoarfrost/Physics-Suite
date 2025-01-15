@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Suite - Live Updates</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/EmiliaHoarfrost/Physics-Suite/97ba13ea03e53574c87f30b8f38385962224a1bb/img/favicon.svg" type="image/svg+xml">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding-top: 50px;
+            background-color: black;
+            color: white;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        /* Loader styles */
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        #loader {
+            width: 288px;  /* 16:9 ratio width */
+            height: 162px; /* 16:9 ratio height */
+            background-image: url('img/loader.gif');
+            background-size: cover;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #111;
+            border-radius: 10px;
+            border: 2px solid #000;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            padding: 14px 16px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        #news-container {
+            margin-top: 100px;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #222;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .news-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-item h2 {
+            font-size: 1.2em;
+            margin: 0;
+            color: #00c8ff;
+        }
+
+        .news-item p {
+            font-size: 1em;
+            margin: 5px 0;
+            color: #ddd;
+        }
+
+        .news-item a {
+            color: #00c8ff;
+            text-decoration: none;
+        }
+
+        .news-item:hover {
+            background-color: #444;
+        }
+
+        .news-item:hover h2 {
+            color: #fff;
+        }
+
+        /* Light Mode Styles */
+        body.light-mode {
+            background-color: white;
+            color: black;
+        }
+
+        #news-container.light-mode {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .news-item.light-mode {
+            color: black;
+        }
+
+        .news-item h2.light-mode {
+            color: black; /* Title goes black in light mode */
+        }
+
+        .news-item p.light-mode {
+            color: #333; /* Description text goes darker in light mode */
+        }
+
+        .news-item a.light-mode {
+            color: #000;
+        }
+
+        .news-item a.light-mode:hover {
+            color: #00c8ff;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: black;
+            color: white;
+        }
+
+        #news-container.dark-mode {
+            background-color: #222;
+            color: #fff;
+        }
+
+        .news-item.dark-mode {
+            color: #ddd;
+        }
+
+        .news-item h2.dark-mode {
+            color: #00c8ff; /* Title remains the same color in dark mode */
+        }
+
+        .news-item p.dark-mode {
+            color: #ddd; /* Description text remains light in dark mode */
+        }
+
+        .news-item a.dark-mode {
+            color: #00c8ff;
+        }
+
+        .news-item a.dark-mode:hover {
+            color: #fff;
+        }
+
+        /* Sidebar Button for Light/Dark Mode */
+        .sidebar {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background: #575757;
+            color: white;
+            border-radius: 10px 0 0 10px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar button {
+            background: #575757;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px 0;
+            transition: background 0.3s;
+        }
+
+        .sidebar button:hover {
+            background: #777;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div id="loader-wrapper">
+        <img id="loader" src="https://github.com/EmiliaHoarfrost/Physics-Suite/blob/main/img/loader.gif?raw=true" alt="Loading...">
+    </div>
+
+    <div class="navbar">
+        <div class="dropdown">
+            <button class="dropbtn">Matrices</button>
+            <div class="dropdown-content">
+                <a href="#">Elementary operations (addition, multiplication, inversion)</a>
+                <a href="#">Projection Matrices</a>
+                <a href="#">Determinant</a>
+                <a href="#">Hermitian adjoint</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="vector.html" class="dropbtn">Vector Analysis</a>
+            <div class="dropdown-content">
+                <a href="#">Gradient</a>
+                <a href="#">Divergence</a>
+                <a href="#">Curl</a>
+                <a href="#">Laplacian</a>
+                <a href="#">Vector Laplacian</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Uncertainties</button>
+            <div class="dropdown-content">
+                <a href="#">Placeholder 1</a>
+                <a href="#">Placeholder 2</a>
+                <a href="#">Placeholder 3</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">SI Units</button>
+            <div class="dropdown-content">
+                <a href="#">Length → meter (m)</a>
+                <a href="#">Mass → kilogram (kg)</a>
+                <a href="#">Time → second (s)</a>
+                <a href="#">Quantity of matter → mole (mol)</a>
+                <a href="#">Temperature → Kelvin (K)</a>
+                <a href="#">Current → Ampere (A)</a>
+                <a href="#">Light intensity → Candela (Cd)</a>
+            </div>
+        </div>
+        <a href="constants.html">Constants</a>
+        <a href="resources.html">Resources</a>
+        <a href="about.html">About</a>
+    </div>
+
+    <div id="news-container"></div>
+
+    <div class="sidebar">
+        <button onclick="toggleMode()">🌗 Theme</button>
+        <a href="livefeed.html"><button>📰 Live Feed</button></a>
+    </div>
+
+    <script>
+        const feedUrls = [
+            { url: "https://physicsworld.com/feed/", source: "Physics World" },
+            { url: "https://www.sciencedaily.com/rss/top/science.xml", source: "Science Daily" },
+            { url: "https://www.nature.com/nature/articles?type=article&format=rss", source: "Nature" }
+        ];
+
+        async function fetchNews() {
+            const newsContainer = document.getElementById("news-container");
+            newsContainer.innerHTML = '<p>Loading live updates...</p>';
+
+            try {
+                let allNews = [];
+                for (const { url, source } of feedUrls) {
+                    const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`);
+                    const data = await response.json();
+
+                    if (data.status === 'ok' && data.items && Array.isArray(data.items)) {
+                        allNews = allNews.concat(data.items.map(item => ({ ...item, source })));
+                    }
+                }
+
+                allNews.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+                newsContainer.innerHTML = '';
+                allNews.forEach(item => displayNewsItem(item, newsContainer));
+            } catch (error) {
+                console.error("Error fetching or displaying news:", error);
+                newsContainer.innerHTML = '<p>Failed to load updates. Please try again later.</p>';
+            }
+        }
+
+        function displayNewsItem(item, container) {
+            const newsItem = document.createElement("div");
+            newsItem.classList.add("news-item");
+
+            const body = document.body;
+            if (body.classList.contains('light-mode')) {
+                newsItem.classList.add('light-mode');
+            } else {
+                newsItem.classList.add('dark-mode');
+            }
+
+            const title = document.createElement("h2");
+            title.textContent = item.title;
+
+            const description = document.createElement("p");
+            description.innerHTML = item.description;
+
+            const pubDate = document.createElement("p");
+            pubDate.textContent = `Published on: ${new Date(item.pubDate).toDateString()}`;
+
+            const link = document.createElement("a");
+            link.href = item.link;
+            link.textContent = `Read more on ${item.source}`;
+
+            newsItem.appendChild(title);
+            newsItem.appendChild(description);
+            newsItem.appendChild(pubDate);
+            newsItem.appendChild(link);
+
+            container.appendChild(newsItem);
+        }
+
+        function toggleMode() {
+            const body = document.body;
+            const newsContainer = document.getElementById('news-container');
+            const newsItems = document.querySelectorAll('.news-item');
+            const isDark = body.classList.contains('dark-mode');
+
+            body.classList.toggle('dark-mode', !isDark);
+            body.classList.toggle('light-mode', isDark);
+
+            newsContainer.classList.toggle('light-mode', isDark);
+            newsItems.forEach(item => item.classList.toggle('light-mode', isDark));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('dark-mode');
+            fetchNews(); // Fetch and display news on page load
+
+            // Ensure the loader is visible for 500ms
+            setTimeout(() => {
+                const loader = document.getElementById('loader-wrapper');
+                loader.style.display = 'none';
+            }, 500);  // 500ms
+        });
+    </script>
+</body>
+</html>
