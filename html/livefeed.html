@@ -69,6 +69,35 @@
             font-size: 20px; /* Set navbar text size to 20px */
         }
 
+        .flag {
+            cursor: pointer;
+            display: inline-block;
+            margin: 0 10px;
+            text-align: center;
+        }
+
+        .flag-img-wrapper {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%; /* Circular shape */
+            overflow: hidden; /* Ensures the image fits within the circle */
+            border: 2px solid black; /* Black border around the circle */
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .flag-img {
+            width: 100%;
+            height: 100%; /* Ensure image fills the container */
+        }
+
+        .flag-label {
+            font-size: 16px;
+            color: white;
+            margin-top: 5px;
+            display: block;
+        }
+
         /* Dropdown Menu Styles */
         .dropdown {
             position: relative;
@@ -158,7 +187,7 @@
         }
 
         .news-item.light-mode {
-            color: black;  /* Change text color to black in light mode */
+            color: black;
         }
 
         .news-item h2.light-mode {
@@ -248,6 +277,28 @@
         <img id="loader" src="https://github.com/EmiliaHoarfrost/Physics-Suite/blob/main/img/loader.gif?raw=true" alt="Loading...">
     </div>
 
+    <!-- Navbar with flag switch -->
+    <div class="navbar">
+        <div class="flag" onclick="changeLanguage('en')">
+            <div class="flag-img-wrapper">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/800px-Flag_of_the_United_Kingdom_%283-5%29.svg.png?20230715230526" alt="English" class="flag-img">
+            </div>
+            <span class="flag-label">EN</span>
+        </div>
+        <div class="flag" onclick="changeLanguage('fr')">
+            <div class="flag-img-wrapper">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Drapeau_de_la_France_%28Bleu_blanc_rouge%29.png" alt="Français" class="flag-img">
+            </div>
+            <span class="flag-label">FR</span>
+        </div>
+        <div class="flag" onclick="changeLanguage('ru')">
+            <div class="flag-img-wrapper">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Russia.svg/800px-Flag_of_Russia.svg.png" alt="Русский" class="flag-img">
+            </div>
+            <span class="flag-label">RU</span>
+        </div>
+    </div>
+
     <div id="news-container"></div>
 
     <div class="sidebar">
@@ -257,19 +308,27 @@
     </div>
 
     <script>
-        const feedUrls = [
-            { url: "https://physicsworld.com/feed/", source: "Physics World" },
-            { url: "https://www.sciencedaily.com/rss/top/science.xml", source: "Science Daily" },
-            { url: "https://www.nature.com/nature/articles?type=article&format=rss", source: "Nature" }
-        ];
+        const feedUrls = {
+            en: [
+                { url: "https://physicsworld.com/feed/", source: "Physics World" },
+                { url: "https://www.sciencedaily.com/rss/top/science.xml", source: "Science Daily" },
+                { url: "https://www.nature.com/subjects/physics/nature.rss", source: "Nature" }
+            ],
+            fr: [
+                { url: "https://trustmyscience.com/categories/actus-science/physique/feed/", source: "Trust My Science" }
+            ],
+            ru: [
+                { url: "https://ufn.ru/ru/articles/rss.xml", source: "UFN" }
+            ]
+        };
 
-        async function fetchNews() {
+        async function fetchNews(language) {
             const newsContainer = document.getElementById("news-container");
             newsContainer.innerHTML = '<p>Loading live updates...</p>';
 
             try {
                 let allNews = [];
-                for (const { url, source } of feedUrls) {
+                for (const { url, source } of feedUrls[language]) {
                     const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`);
                     const data = await response.json();
 
@@ -332,9 +391,13 @@
             newsItems.forEach(item => item.classList.toggle('light-mode', isDark));
         }
 
+        function changeLanguage(language) {
+            fetchNews(language);
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.add('dark-mode');
-            fetchNews(); // Fetch and display news on page load
+            fetchNews('en'); // Default to English
 
             // Ensure the loader is visible for 500ms
             setTimeout(() => {
