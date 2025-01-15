@@ -2,30 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-	<script type="text/javascript" async 
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-	</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vector Analysis Calculator</title>
+    <title>Vector Analysis - Physics Suite</title>
     <style>
-        /* General body styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: black;
+            padding-top: 50px; /* Add padding to account for fixed navbar */
+            background-color: black; /* Use the exact dark color from Resources page */
             color: white;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        /* Navbar container */
         .navbar {
             background-color: #333;
             overflow: hidden;
             display: flex;
             justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
         }
 
-        /* Navbar links */
         .navbar a {
             display: block;
             color: white;
@@ -34,18 +34,15 @@
             text-decoration: none;
         }
 
-        /* Hover effect for navbar links */
         .navbar a:hover, .dropdown:hover .dropbtn {
             background-color: #575757;
         }
 
-        /* Dropdown container */
         .dropdown {
             float: left;
             overflow: hidden;
         }
 
-        /* Dropdown button */
         .dropdown .dropbtn {
             font-size: 16px;
             border: none;
@@ -57,17 +54,15 @@
             margin: 0;
         }
 
-        /* Dropdown content container */
         .dropdown-content {
             display: none;
-            position: absolute;
+            position: fixed;
             background-color: #575757;
             min-width: 160px;
             box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
             z-index: 1;
         }
 
-        /* Links inside dropdowns */
         .dropdown-content a {
             color: white;
             padding: 12px 16px;
@@ -76,17 +71,14 @@
             text-align: left;
         }
 
-        /* Hover effects for dropdown links */
         .dropdown-content a:hover {
             background-color: #777;
         }
 
-        /* Show dropdown when hovering */
         .dropdown:hover .dropdown-content {
             display: block;
         }
 
-        /* Content section (the calculator) */
         .content {
             max-width: 800px;
             margin: 50px auto;
@@ -96,49 +88,114 @@
             border-radius: 10px;
             background-color: #222;
             font-size: 20px;
-            line-height: 1.6;
+            line-height: 1.8;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        .content input, .content select {
-            background-color: #333;
-            border: 1px solid #575757;
-            color: white;
-            padding: 10px;
-            width: 100%;
+        .content.light-mode {
+            background-color: #f0f0f0;
+            color: black;
+        }
+
+        .content a {
+            color: #00c8ff;
+            text-decoration: none;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin: 20px 0;
+        }
+
+        ul li {
             margin: 10px 0;
         }
 
-        .content input[type="text"], .content select {
-            width: 50%; /* Restrict the width of the inputs and select dropdown */
+        .sidebar {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background: #575757;
+            color: white;
+            border-radius: 10px 0 0 10px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .content button {
-            background-color: #575757;
+        .sidebar button {
+            background: #575757;
             color: white;
-            padding: 14px 16px;
             border: none;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .content button:hover {
-            background-color: #888;
-        }
-
-        .output {
-            margin-top: 20px;
-            background-color: #333;
-            padding: 15px;
+            padding: 10px 20px;
             border-radius: 5px;
-            color: white;
-            white-space: pre-wrap;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px 0;
+            transition: background 0.3s;
+        }
+
+        .sidebar button:hover {
+            background: #777;
+        }
+
+        .sidebar button.light-mode {
+            background: #ddd;
+            color: black;
+        }
+
+        body.light-mode {
+            background-color: white;
+            color: black;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+    <script>
+        function toggleMode() {
+            const body = document.body;
+            const content = document.querySelectorAll('.content');
+            const buttons = document.querySelectorAll('.sidebar button');
+            const isDark = body.classList.contains('dark-mode');
+            
+            body.classList.toggle('dark-mode', !isDark);
+            body.classList.toggle('light-mode', isDark);
+            
+            content.forEach(el => el.classList.toggle('light-mode', isDark));
+            
+            buttons.forEach(button => button.classList.toggle('light-mode', isDark));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('dark-mode');
+        });
+    </script>
 </head>
 <body>
+    <div class="sidebar">
+        <button onclick="toggleMode()">🌗 Theme</button>
+    </div>
     <div class="navbar">
-        <!-- Matrices Dropdown -->
         <div class="dropdown">
             <button class="dropbtn">Matrices</button>
             <div class="dropdown-content">
@@ -148,8 +205,6 @@
                 <a href="#">Hermitian adjoint</a>
             </div>
         </div>
-
-        <!-- Vector Analysis Dropdown (Updated as a link) -->
         <div class="dropdown">
             <a href="vector.html" class="dropbtn">Vector Analysis</a>
             <div class="dropdown-content">
@@ -160,8 +215,6 @@
                 <a href="#">Vector Laplacian</a>
             </div>
         </div>
-
-        <!-- Uncertainties Dropdown -->
         <div class="dropdown">
             <button class="dropbtn">Uncertainties</button>
             <div class="dropdown-content">
@@ -170,8 +223,6 @@
                 <a href="#">Placeholder 3</a>
             </div>
         </div>
-
-        <!-- SI Units Dropdown -->
         <div class="dropdown">
             <button class="dropbtn">SI Units</button>
             <div class="dropdown-content">
@@ -184,17 +235,13 @@
                 <a href="#">Light intensity → Candela (Cd)</a>
             </div>
         </div>
-
-        <!-- Constants Link -->
         <a href="constants.html">Constants</a>
-
-        <!-- About Link -->
+        <a href="resources.html">Resources</a>
         <a href="about.html">About</a>
     </div>
-
     <div class="content">
-        <h1>Vector Analysis Calculator</h1>
-        <p>Use this tool to compute gradients, divergences, or Laplacians in Cartesian, Cylindrical, or Spherical coordinates.</p>
+        <h1>Vector Analysis Tools</h1>
+        <p>Choose a mathematical operation to compute in Cartesian, Cylindrical, or Spherical coordinates:</p>
 
         <div>
             <label for="type">Select Operation:</label><br>
@@ -267,7 +314,6 @@ result
             try {
                 const output = await pyodide.runPython(pythonScript);
                 document.getElementById('output').textContent = output;
-                MathJax.Hub.Queue(["Typeset", MathJax.Hub, "output"]);
             } catch (err) {
                 document.getElementById('output').textContent = "Error in calculation: " + err;
             }
