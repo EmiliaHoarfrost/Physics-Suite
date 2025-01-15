@@ -1,4 +1,4 @@
-https://github.com/EmiliaHoarfrost/Physics-Suite/blob/main/img/loader.gif
+![Physics Suite](https://github.com/EmiliaHoarfrost/Physics-Suite/blob/main/img/loader.gif)
 
 # **Physics Suite** - A Comprehensive Toolkit for Physics
 
