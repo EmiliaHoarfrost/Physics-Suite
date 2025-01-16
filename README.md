@@ -5,7 +5,7 @@
 **Physics Suite** is a powerful toolkit designed to meet the needs of **academics**, **professionals**, and **students** in the field of physics. It includes a variety of tools to streamline your work and studies:
 
 - **🌗 Theme Options**: Easily toggle between **Light** and **Dark** themes for a comfortable viewing experience.
-- **📰 Live Feed**: Stay informed with real-time updates on the latest developments in physics.
+- **📰 Live Feed**: Stay informed with real-time **RSS** updates on the latest developments in physics from all over the world.
 - **🔢 Matrices**: Perform complex matrix operations and apply them to physics problems.
 - 🚀 **Vector Analysis**: Access tools for vector operations, crucial in many physics domains.
 - **⏱ Uncertainties**: Calculate and manage uncertainties in experimental data.
