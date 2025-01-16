@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Suite - Live Updates</title>
+    <title>Live Feed - Physics Suite</title>
     <link rel="icon" href="https://raw.githubusercontent.com/EmiliaHoarfrost/Physics-Suite/97ba13ea03e53574c87f30b8f38385962224a1bb/img/favicon.svg" type="image/svg+xml">
     <style>
         body {
@@ -57,7 +57,7 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-			padding: 5px 0;
+            padding: 5px 0;
         }
 
         .navbar a, .navbar .dropbtn {
@@ -67,7 +67,7 @@
             text-decoration: none;
             display: inline-block;
             text-align: center;
-            font-size: 20px; /* Set navbar text size to 20px */
+            font-size: 20px;
         }
 
         .flag {
@@ -80,16 +80,16 @@
         .flag-img-wrapper {
             width: 30px;
             height: 30px;
-            border-radius: 50%; /* Circular shape */
-            overflow: hidden; /* Ensures the image fits within the circle */
-            border: 2px solid white; /* Black border around the circle */
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid white;
             display: inline-block;
             margin-bottom: 5px;
         }
 
         .flag-img {
             width: 100%;
-            height: 100%; /* Ensure image fills the container */
+            height: 100%;
         }
 
         .flag-label {
@@ -192,11 +192,11 @@
         }
 
         .news-item h2.light-mode {
-            color: black; /* Title goes black in light mode */
+            color: black;
         }
 
         .news-item p.light-mode {
-            color: #333; /* Description text goes darker in light mode */
+            color: #333;
         }
 
         .news-item a.light-mode {
@@ -223,11 +223,11 @@
         }
 
         .news-item h2.dark-mode {
-            color: #00c8ff; /* Title remains the same color in dark mode */
+            color: #00c8ff;
         }
 
         .news-item p.dark-mode {
-            color: #ddd; /* Description text remains light in dark mode */
+            color: #ddd;
         }
 
         .news-item a.dark-mode {
@@ -252,7 +252,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 20px; /* Set sidebar text size to 20px */
+            font-size: 20px;
         }
 
         .sidebar button {
@@ -269,6 +269,33 @@
 
         .sidebar button:hover {
             background: #777;
+        }
+
+        .save-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #00c8ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+            padding-left: 15px; /* Add padding to the left of the Save button */
+        }
+
+        .remove-btn {
+            margin-top: 5px;
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            padding-left: 15px; /* Add padding to the left of the Remove button */
+        }
+
+        .save-btn:hover, .remove-btn:hover {
+            background-color: #0088cc;
         }
     </style>
 </head>
@@ -304,6 +331,7 @@
 
     <div class="sidebar">
         <button onclick="toggleMode()">🌗 Theme</button>
+        <button onclick="viewSavedArticles()">💾 Saved Articles</button>
         <a href="livefeed.html"><button>📰 Live Feed</button></a>
         <a href="about.html"><button>🏠 About</button></a>
     </div>
@@ -323,6 +351,8 @@
             ]
         };
 
+        let savedArticles = JSON.parse(localStorage.getItem('savedArticles')) || [];
+
         async function fetchNews(language) {
             const newsContainer = document.getElementById("news-container");
             newsContainer.innerHTML = '<p>Loading live updates...</p>';
@@ -341,9 +371,17 @@
                 allNews.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
                 newsContainer.innerHTML = '';
                 allNews.forEach(item => displayNewsItem(item, newsContainer));
+
+                // Hide loader after a short delay (timeout for user experience)
+                setTimeout(() => {
+                    document.getElementById("loader-wrapper").style.display = "none";
+                }, 500); // Adjust this delay if needed
             } catch (error) {
                 console.error("Error fetching or displaying news:", error);
                 newsContainer.innerHTML = '<p>Failed to load updates. Please try again later.</p>';
+                setTimeout(() => {
+                    document.getElementById("loader-wrapper").style.display = "none";
+                }, 500);
             }
         }
 
@@ -369,43 +407,109 @@
 
             const link = document.createElement("a");
             link.href = item.link;
-            link.textContent = `Read more on ${item.source}`;
+            link.textContent = `Read more on ${item.source} `;
+
+            const saveButton = document.createElement("button");
+            saveButton.classList.add("save-btn");
+            saveButton.textContent = "Save for Later";
+            saveButton.onclick = () => saveArticle(item);
 
             newsItem.appendChild(title);
             newsItem.appendChild(description);
             newsItem.appendChild(pubDate);
             newsItem.appendChild(link);
+            newsItem.appendChild(saveButton);
 
             container.appendChild(newsItem);
         }
 
-        function toggleMode() {
-            const body = document.body;
-            const newsContainer = document.getElementById('news-container');
-            const newsItems = document.querySelectorAll('.news-item');
-            const isDark = body.classList.contains('dark-mode');
+        function saveArticle(article) {
+            savedArticles.push(article);
+            localStorage.setItem('savedArticles', JSON.stringify(savedArticles));
+            alert("Article saved for later!");
+        }
 
-            body.classList.toggle('dark-mode', !isDark);
-            body.classList.toggle('light-mode', isDark);
+        function removeSavedArticle(article) {
+            savedArticles = savedArticles.filter(savedArticle => savedArticle.link !== article.link);
+            localStorage.setItem('savedArticles', JSON.stringify(savedArticles));
+            alert("Article removed from saved list.");
+            displaySavedArticles();
+        }
 
-            newsContainer.classList.toggle('light-mode', isDark);
-            newsItems.forEach(item => item.classList.toggle('light-mode', isDark));
+        function displaySavedArticles() {
+            const newsContainer = document.getElementById("news-container");
+            newsContainer.innerHTML = '';
+
+            if (savedArticles.length === 0) {
+                newsContainer.innerHTML = "<p>No saved articles yet.</p>";
+                return;
+            }
+
+            savedArticles.forEach(item => {
+                const newsItem = document.createElement("div");
+                newsItem.classList.add("news-item");
+
+                const body = document.body;
+                if (body.classList.contains('light-mode')) {
+                    newsItem.classList.add('light-mode');
+                } else {
+                    newsItem.classList.add('dark-mode');
+                }
+
+                const title = document.createElement("h2");
+                title.textContent = item.title;
+
+                const description = document.createElement("p");
+                description.innerHTML = item.description;
+
+                const pubDate = document.createElement("p");
+                pubDate.textContent = `Published on: ${new Date(item.pubDate).toDateString()}`;
+
+                const link = document.createElement("a");
+                link.href = item.link;
+                link.textContent = `Read more on ${item.source} `;
+
+                const removeButton = document.createElement("button");
+                removeButton.classList.add("remove-btn");
+                removeButton.textContent = "Remove";
+                removeButton.onclick = () => removeSavedArticle(item);
+
+                newsItem.appendChild(title);
+                newsItem.appendChild(description);
+                newsItem.appendChild(pubDate);
+                newsItem.appendChild(link);
+                newsItem.appendChild(removeButton);
+
+                newsContainer.appendChild(newsItem);
+            });
         }
 
         function changeLanguage(language) {
             fetchNews(language);
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.classList.add('dark-mode');
-            fetchNews('en'); // Default to English
+        function toggleMode() {
+            const body = document.body;
+            const newsContainer = document.getElementById("news-container");
+            if (body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                newsContainer.classList.remove('light-mode');
+                newsContainer.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                newsContainer.classList.remove('dark-mode');
+                newsContainer.classList.add('light-mode');
+            }
+        }
 
-            // Ensure the loader is visible for 500ms
-            setTimeout(() => {
-                const loader = document.getElementById('loader-wrapper');
-                loader.style.display = 'none';
-            }, 500);  // 500ms
-        });
+        function viewSavedArticles() {
+            displaySavedArticles();
+        }
+
+        // Load English news by default
+        fetchNews('en');
     </script>
 </body>
 </html>
