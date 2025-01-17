@@ -1,5 +1,6 @@
 ![Physics Suite](https://github.com/EmiliaHoarfrost/Physics-Suite/blob/main/img/loader.gif)
-![Commits Badge](https://img.shields.io/badge/commits-74-blue) ![Issues Badge](https://img.shields.io/badge/issues-3-green)
+![Commits Badge](https://img.shields.io/badge/commits-75-blue) ![Issues Badge](https://img.shields.io/badge/issues-3-green) ![Lines Badge](https://img.shields.io/badge/lines-1.8k-red)
+
 # **Physics Suite** - A Comprehensive Toolkit for Physics
 
 **Physics Suite** is a powerful toolkit designed to meet the needs of **academics**, **professionals**, and **students** in the field of physics. It includes a variety of tools to streamline your work and studies:
